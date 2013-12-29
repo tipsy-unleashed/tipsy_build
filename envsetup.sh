@@ -1,3 +1,4 @@
+- repolastsync: Prints date and time of last repo sync.
 
 export HMM_DESCRIPTIVE=(
 "lunch:   lunch <product_name>-<build_variant>"
@@ -2019,6 +2020,13 @@ function cmka() {
         mka clean
         mka
     fi
+}
+
+function repolastsync() {
+    RLSPATH="$ANDROID_BUILD_TOP/.repo/.repo_fetchtimes.json"
+    RLSLOCAL=$(date -d "$(stat -c %z $RLSPATH)" +"%e %b %Y, %T %Z")
+    RLSUTC=$(date -d "$(stat -c %z $RLSPATH)" -u +"%e %b %Y, %T %Z")
+    echo "Last repo sync: $RLSLOCAL / $RLSUTC"
 }
 
 function reposync() {
