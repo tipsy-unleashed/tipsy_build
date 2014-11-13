@@ -48,7 +48,7 @@ if path.exists(defconfig):
     if prekernel_version:
         kernel_version = sub(r'(CONFIG_LOCALVERSION=)|\"|\n|-', "", prekernel_version.group(0))
         kernel_version = "%s-%s-kernel" % (kernel_version or "Slim", device)
-    else:
+        else:
         kernel_version = "Slim-%s-kernel" % device
 else:
     kernel_version = "Slim-%s-kernel" % device
