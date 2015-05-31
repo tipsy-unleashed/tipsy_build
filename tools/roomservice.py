@@ -42,11 +42,11 @@ except ImportError:
 DEBUG = False
 default_manifest = ".repo/manifest.xml"
 
-custom_local_manifest = ".repo/local_manifests/slim_manifest.xml"
-custom_default_revision = "mm6.0"
-custom_dependencies = "slim.dependencies"
-org_manifest = "SlimRoms"  # leave empty if org is provided in manifest
-org_display = "SlimRoms"  # needed for displaying
+custom_local_manifest = ".repo/local_manifests/tipsy_manifest.xml"
+custom_default_revision = "6.0"
+custom_dependencies = "tipsy.dependencies"
+org_manifest = "TipsyOs-Devices"  # leave empty if org is provided in manifest
+org_display = "TipsyOs-Devices"  # needed for displaying
 
 github_auth = None
 
@@ -322,7 +322,7 @@ def main():
         if repo_path:
             fetch_dependencies(repo_path)
         else:
-            print("Trying dependencies-only mode on a"
+            print("Trying dependencies-only mode on a "
                   "non-existing device tree?")
         sys.exit()
 
