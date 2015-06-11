@@ -1715,6 +1715,14 @@ TIPSY_TARGET_PACKAGE := $(PRODUCT_OUT)/$(TIPSY_MOD_VERSION).zip
 
 .PHONY: otapackage tipsy bootzip
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
+
+ifeq ($(USE_PREBUILT_CHROMIUM),1)
+ifneq ($(PRODUCT_PREBUILT_WEBVIEWCHROMIUM),yes)
+	@echo "Running Chromium prebuilt setup script..."
+	$(hide) . $(TOPDIR)vendor/slim/tools/chromium_prebuilt.sh $(TOP)
+endif
+endif
+
 tipsy: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(TIPSY_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(TIPSY_TARGET_PACKAGE) > $(TIPSY_TARGET_PACKAGE).md5sum
