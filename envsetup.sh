@@ -1,5 +1,3 @@
-- repolastsync: Prints date and time of last repo sync.
-
 export HMM_DESCRIPTIVE=(
 "lunch:   lunch <product_name>-<build_variant>"
 "tapas:   tapas [<App1> <App2> ...] [arm|x86|mips|armv5|arm64|x86_64|mips64] [eng|userdebug|user]"
@@ -30,6 +28,7 @@ export HMM_DESCRIPTIVE=(
 "repopick: Utility to fetch changes from Gerrit."
 "installboot: Installs a boot.img to the connected device."
 "installrecovery: Installs a recovery.img to the connected device."
+"repolastsync: Prints date and time of last repo sync."
 )
 
 function hmm() {
