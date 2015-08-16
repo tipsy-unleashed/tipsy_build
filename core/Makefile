@@ -1841,7 +1841,16 @@ otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 tipsy: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(TIPSY_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(TIPSY_TARGET_PACKAGE) > $(TIPSY_TARGET_PACKAGE).md5sum
-	@echo -e ${CL_CYN}"Package Complete: $(TIPSY_TARGET_PACKAGE)"${CL_RST}
+	@echo -e ${CL_YLW}""${CL_YLW}
+	@echo -e ${CL_YLW}"   ██╗   ██╗ ██████╗ ██╗   ██╗     █████╗ ██████╗ ███████╗    ████████╗██╗██████╗ ███████╗██╗   ██╗    ██╗"${CL_YLW}
+	@echo -e ${CL_YLW}"   ╚██╗ ██╔╝██╔═══██╗██║   ██║    ██╔══██╗██╔══██╗██╔════╝    ╚══██╔══╝██║██╔══██╗██╔════╝╚██╗ ██╔╝    ██║"${CL_YLW}
+	@echo -e ${CL_YLW}"    ╚████╔╝ ██║   ██║██║   ██║    ███████║██████╔╝█████╗         ██║   ██║██████╔╝███████╗ ╚████╔╝     ██║"${CL_YLW}
+	@echo -e ${CL_YLW}"     ╚██╔╝  ██║   ██║██║   ██║    ██╔══██║██╔══██╗██╔══╝         ██║   ██║██╔═══╝ ╚════██║  ╚██╔╝      ╚═╝"${CL_YLW}
+	@echo -e ${CL_YLW}"      ██║   ╚██████╔╝╚██████╔╝    ██║  ██║██║  ██║███████╗       ██║   ██║██║     ███████║   ██║       ██╗"${CL_YLW}
+	@echo -e ${CL_YLW}"      ╚═╝    ╚═════╝  ╚═════╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝       ╚═╝   ╚═╝╚═╝     ╚══════╝   ╚═╝       ╚═╝"${CL_YLW}
+	@echo -e ${CL_YLW}"                                                                                                          "${CL_YLW}
+	@echo -e ${CL_YLW}""${CL_YLW}
+	@echo -e ${CL_CYN}"Package Complete: $(TIPSY_TARGET_PACKAGE)"${CL_CYN}${CL_RST}
 
 # -----------------------------------------------------------------
 # The factory package
