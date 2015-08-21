@@ -1130,7 +1130,7 @@ class BlockDifference:
   def WriteScript(self, script, output_zip, progress=None):
     if not self.src:
       # write the output unconditionally
-      script.Print("Patching %s image unconditionally..." % (self.partition,))
+      script.Print("This %s is about to be Tipsy-fied..." % (self.partition,))
     else:
       script.Print("Patching %s image after verification." % (self.partition,))
 
