@@ -1691,7 +1691,7 @@ endif
 
 BOOT_ZIP_FROM_IMAGE_SCRIPT := ./build/tools/releasetools/boot_flash_from_image
 KERNEL_PATH := $(TARGET_KERNEL_SOURCE)/arch/arm/configs/$(TARGET_KERNEL_CONFIG)
-#BOOT_ZIP_OUT_FILE := Tipsy-Kernel-$(DEVICE).zip
+BOOT_ZIP_OUT_FILE := Tipsy-Kernel-$(DEVICE).zip
 
 ifeq ($(TARGET_OTA_ASSERT_DEVICE),)
     $(INTERNAL_OTA_PACKAGE_TARGET): override_device := auto
@@ -1702,9 +1702,6 @@ endif
 ifneq ($(TARGET_UNIFIED_DEVICE),)
     $(INTERNAL_OTA_PACKAGE_TARGET): override_prop := --override_prop=true
 endif
-
-BOOT_ZIP_FROM_IMAGE_SCRIPT := ./build/tools/releasetools/boot_flash_from_image
-KERNEL_PATH := $(TARGET_KERNEL_SOURCE)/arch/arm/configs/$(TARGET_KERNEL_CONFIG)
 
 ifeq ($(BLOCK_BASED_OTA),true)
     $(INTERNAL_OTA_PACKAGE_TARGET): block_based := --block
