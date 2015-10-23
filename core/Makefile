@@ -1836,9 +1836,9 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
 
 TIPSY_TARGET_PACKAGE := $(PRODUCT_OUT)/$(TIPSY_MOD_VERSION).zip
 
-.PHONY: otapackage bacon
+.PHONY: otapackage tipsy
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
-bacon: otapackage
+tipsy: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(TIPSY_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(TIPSY_TARGET_PACKAGE) > $(TIPSY_TARGET_PACKAGE).md5sum
 	@echo -e ${CL_CYN}"Package Complete: $(TIPSY_TARGET_PACKAGE)"${CL_RST}
