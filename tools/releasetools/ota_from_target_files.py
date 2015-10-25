@@ -639,6 +639,16 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   if HasVendorPartition(input_zip):
     system_progress -= 0.1
 
+  script.Print("******************************************************");
+  script.Print("   ______   __     ______   ______     __  __         ");
+  script.Print("  /\__  _\ /\ \   /\  == \ /\  ___\   /\ \_\ \        ");
+  script.Print("  \/_/\ \/ \ \ \  \ \  _-/ \ \___  \  \ \____ \       ");
+  script.Print("     \ \_\  \ \_\  \ \_\    \/\_____\  \/\_____\      ");
+  script.Print("      \/_/   \/_/   \/_/     \/_____/   \/_____/      ");
+  script.Print("                                                      ");
+  script.Print("              A Drunken man's Project                 ");
+  script.Print("******************************************************"); 
+
   script.AppendExtra("if is_mounted(\"/data\") then")
   script.ValidateSignatures("data")
   script.AppendExtra("else")
