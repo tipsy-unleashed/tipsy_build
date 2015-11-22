@@ -267,6 +267,9 @@ endif
 		echo "$(line)" >> $@;)
 	$(hide) cat $(INSTALLED_ANDROID_INFO_TXT_TARGET) | grep 'require version-' | sed -e 's/require version-/ro.build.expect./g' >> $@
 	$(hide) build/tools/post_process_props.py $@ "$(PRODUCT_PROPERTY_UBER_OVERRIDES)" $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SYSTEM_PROPERTY_BLACKLIST)
+ifdef EXTENDED_POST_PROCESS_PROPS
+	$(hide) $(EXTENDED_POST_PROCESS_PROPS) $@
+endif
 
 build_desc :=
 
@@ -1842,6 +1845,10 @@ else
 endif
 endif
 
+BOOT_ZIP_FROM_IMAGE_SCRIPT := ./build/tools/releasetools/boot_flash_from_image
+KERNEL_PATH := $(TARGET_KERNEL_SOURCE)/arch/arm/configs/$(TARGET_KERNEL_CONFIG)
+#BOOT_ZIP_OUT_FILE := Slim-Kernel-$(DEVICE).zip
+
 ifeq ($(TARGET_OTA_ASSERT_DEVICE),)
     $(INTERNAL_OTA_PACKAGE_TARGET): override_device := auto
 else
@@ -1875,7 +1882,7 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
 
 TIPSY_TARGET_PACKAGE := $(PRODUCT_OUT)/$(TIPSY_MOD_VERSION).zip
 
-.PHONY: otapackage tipsy
+.PHONY: otapackage tipsy bootzip
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 tipsy: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(TIPSY_TARGET_PACKAGE)
@@ -1891,6 +1898,12 @@ tipsy: otapackage
 	@echo -e ${CL_YLW}""${CL_YLW}
 	@echo -e ${CL_CYN}"Package Complete: $(TIPSY_TARGET_PACKAGE)"${CL_CYN}${CL_RST}
 
+bootzip: bootimage
+	$(BOOT_ZIP_FROM_IMAGE_SCRIPT) \
+	   $(recovery_fstab) \
+	   $(OUT) \
+	   $(TARGET_DEVICE)
+	
 # -----------------------------------------------------------------
 # The factory package
 
