@@ -71,8 +71,14 @@ ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
     endif
 
 $(call set-platform-specific-path,AUDIO,audio,hardware/qcom/audio-caf)
+
+ifeq ($(SONY_BF64_KERNEL_VARIANT),true)
+$(call project-set-path,qcom-display,hardware/qcom/display-caf/sony)
+$(call project-set-path,qcom-media,hardware/qcom/media-caf/sony)
+else
 $(call set-platform-specific-path,DISPLAY,display,hardware/qcom/display-caf)
 $(call set-platform-specific-path,MEDIA,media,hardware/qcom/media-caf)
+endif
 
 $(call set-device-specific-path,CAMERA,camera,hardware/qcom/camera)
 $(call set-device-specific-path,GPS,gps,hardware/qcom/gps)
@@ -87,8 +93,10 @@ $(call bt-vendor-set-path-variant,bt-caf)
 else
 
 $(call project-set-path,qcom-audio,hardware/qcom/audio/default)
+
 $(call project-set-path,qcom-display,hardware/qcom/display/$(TARGET_BOARD_PLATFORM))
 $(call project-set-path,qcom-media,hardware/qcom/media/default)
+
 
 $(call project-set-path,qcom-camera,hardware/qcom/camera)
 $(call project-set-path,qcom-gps,hardware/qcom/gps)
