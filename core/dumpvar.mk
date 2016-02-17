@@ -85,6 +85,11 @@ $(info   KERNEL_TOOLCHAIN_USED=$(TARGET_GCC_VERSION_ARM))
 else
 $(info   KERNEL_TOOLCHAIN_USED=$(TARGET_GCC_VERSION))
 endif
+ifdef    CORTEX_TUNINGS
+$(info   CORTEX_TUNINGS=$(CORTEX_TUNINGS))
+else
+$(info   CORTEX_TUNINGS=false)
+endif
 $(info   HOST_ARCH=$(HOST_ARCH))
 $(info   HOST_OS=$(HOST_OS))
 $(info   HOST_OS_EXTRA=$(HOST_OS_EXTRA))

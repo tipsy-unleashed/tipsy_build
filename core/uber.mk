@@ -56,9 +56,6 @@ LOCAL_DISABLE_STRICT := \
 	libandroidfw \
 	dnsmasq \
 	static_busybox \
-	libwebviewchromium \
-	libwebviewchromium_loader \
-	libwebviewchromium_plat_support \
 	content_content_renderer_gyp \
 	third_party_WebKit_Source_modules_modules_gyp \
 	third_party_WebKit_Source_platform_blink_platform_gyp \
@@ -81,6 +78,13 @@ LOCAL_DISABLE_STRICT := \
 	libc_malloc \
 	mdnsd \
 	libstagefright_webm \
+	libcutils \
+	liblog \
+	libbacktrace \
+        libunwind \
+        libbase \
+        libbacktrace_test \
+        backtrace_test \
 	libc_bionic_ndk \
 	libc_dns \
 	libc_gdtoa \
@@ -92,12 +96,17 @@ LOCAL_DISABLE_STRICT := \
 	libandroidfw \
 	libosi \
 	libnetlink \
+        libext4 \
 	clatd \
 	ip \
+        libnetlink \
+        fio\
+        tcpdump \
 	libc_nomalloc \
 	linker \
 	sensors.flounder \
-	libnvvisualizer
+	libnvvisualizer \
+	libskia
 
 LOCAL_FORCE_DISABLE_STRICT := \
 	libziparchive-host \
@@ -124,7 +133,8 @@ LOCAL_FORCE_DISABLE_STRICT := \
 	linker \
 	libc_malloc \
 	sensors.flounder \
-	libnvvisualizer
+	libnvvisualizer \
+	libskia
 
 DISABLE_STRICT := \
 	-fno-strict-aliasing
@@ -145,23 +155,31 @@ STRICT_CLANG_LEVEL := \
 LOCAL_DISABLE_KRAIT := \
 	libc_dns \
 	libc_tzcode \
-	bluetooth.default \
-	libwebviewchromium \
-	libwebviewchromium_loader \
-	libwebviewchromium_plat_support
+	bluetooth.default 
 
 KRAIT_FLAGS := \
 	-mcpu=cortex-a15 \
 	-mtune=cortex-a15
 
+###############
+# Cortex Tunings
+###############
+LOCAL_DISABLE_CORTEX := \
+	libc_dns \
+	libc_tzcode \
+	bluetooth.default 
+
+CORTEX_FLAGS := \
+       -mcpu=cortex-a57 \
+       -mtune=cortex-a57 \
+       -mcpu=cortex-a53 \
+       -mtune=cortex-a53 
+
 #############
 # GCC Tunings
 #############
 LOCAL_DISABLE_GCCONLY := \
-	bluetooth.default \
-	libwebviewchromium \
-	libwebviewchromium_loader \
-	libwebviewchromium_plat_support
+	bluetooth.default 
 
 ifeq (arm,$(TARGET_ARCH))
 GCC_ONLY := \
@@ -219,6 +237,7 @@ LOCAL_DISABLE_GRAPHITE := \
 	libwebrtc_spl \
 	libpcap \
 	libFraunhoferAAC \
+        libft2 \
 	libhwui
 
 GRAPHITE_FLAGS := \
