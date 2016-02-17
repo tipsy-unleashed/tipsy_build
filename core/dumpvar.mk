@@ -90,6 +90,11 @@ $(info   CORTEX_TUNINGS=$(CORTEX_TUNINGS))
 else
 $(info   CORTEX_TUNINGS=false)
 endif
+ifdef    POLLY_OPTIMIZATION
+$(info   POLLY_OPTIMIZATION=$(POLLY_OPTIMIZATION))
+else
+$(info   POLLY_OPTIMIZATION=false)
+endif
 $(info   HOST_ARCH=$(HOST_ARCH))
 $(info   HOST_OS=$(HOST_OS))
 $(info   HOST_OS_EXTRA=$(HOST_OS_EXTRA))
