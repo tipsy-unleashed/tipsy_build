@@ -13,6 +13,103 @@
 # limitations under the License.
 #
 
+NOOP_BLUETOOTH := \
+	libbluetooth_jni \
+	bluetooth.mapsapi \
+	bluetooth.default \
+	bluetooth.mapsapi \
+	libbt-brcm_stack \
+	audio.a2dp.default \
+	libbt-brcm_gki \
+	libbt-utils \
+	libbt-qcom_sbc_decoder \
+	libbt-brcm_bta \
+	libbt-brcm_stack \
+	libbt-vendor \
+	libbtprofile \
+	libbtdevice \
+	libbtcore \
+	bdt \
+	bdtest \
+	libbt-hci \
+	libosi \
+	ositests \
+	libbluetooth_jni \
+	net_test_osi \
+	net_test_device \
+	net_test_btcore \
+	net_bdtool \
+	net_hci \
+	bdAddrLoader \
+	camera.msm8084 \
+	gps.msm8084 \
+	gralloc.msm8084 \
+	keystore.msm8084 \
+	memtrack.msm8084 \
+	hwcomposer.msm8084 \
+	audio.primary.msm8084
+
+NO_OPTIMIZATIONS += \
+	libbypass \
+	libperfprofdcore \
+	libwebrtc_spl \
+	libFraunhoferAAC \
+	libmincrypt \
+	libc++abi \
+	nfc_nci.bcm2079x.default \
+	libjni_latinime_common_static \
+	libcompiler_rt \
+	libnativebridge \
+	libc++ \
+	libRSSupport \
+	libskia \
+	libxml2 \
+	netd \
+	libscrypt_static \
+	libRSCpuRef \
+	libRSDriver \
+	libmm-qcamera \
+	libmmcamera_interface \
+	libmmjpeg_interface \
+	mm-jpeg-interface-test \
+	mm-qcamera-app \
+	libqomx_core \
+	libwebp-decode \
+	libwebp-encode \
+	libsfntly \
+	mdnsd \
+	make_f2fs \
+	linker \
+	libft2 \
+	libhwui \
+	libril \
+	librilutils \
+	librilutils_static \
+	libpcap \
+	liblog \
+	logd \
+	logcat \
+	libdex \
+	libFraunhoferAAC \
+	libicui18n \
+	libselinux \
+	libsfntly \
+	libharfbuzz_ng \
+	libpdfiumcore \
+	libpdfium \
+	rsg-generator \
+	libloc_core \
+	libqdutils \
+	libRSCpuRef \
+	libmedia_jni \
+	libcrypto \
+	libcrypto-host_32 \
+	libsqlite_jni_32 \
+	libfdlibm \
+	libnfc-nci \
+	libxml2 \
+	$(NOOP_BLUETOOTH)
+
 ################
 #Strict Aliasing
 ################
@@ -249,3 +346,19 @@ GRAPHITE_FLAGS := \
 	-floop-interchange \
 	-floop-strip-mine \
 	-floop-block
+###########
+# Pipe
+###########
+LOCAL_DISABLE_PIPE := \
+	libc_dns \
+	libc_tzcode \
+	$(NO_OPTIMIZATIONS)
+
+###########
+# Memory Sanitize
+###########
+DISABLE_SANITIZE_LEAK := \
+	libc_dns \
+	libc_tzcode \
+	$(NOOP_BLUETOOTH) \
+	$(NO_OPTIMIZATIONS)
