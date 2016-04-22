@@ -1119,6 +1119,7 @@ magic:
 .PHONY: dirty
 dirty:
 	@rm -rf $(OUT_DIR)/target/product/*/system/build.prop
+	@rm -rf $(OUT_DIR)/target/product/*/obj/ETC/system_build_prop_intermediates/
 	@rm -rf $(OUT_DIR)/target/product/*/*.zip
 	@rm -rf $(OUT_DIR)/target/product/*/*.md5sum
 	@echo -e ${CL_GRN}"build.prop and zip files erased"${CL_RST}
