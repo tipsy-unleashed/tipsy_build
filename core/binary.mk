@@ -267,6 +267,7 @@ my_static_libraries := $(LOCAL_STATIC_LIBRARIES)
 my_whole_static_libraries := $(LOCAL_WHOLE_STATIC_LIBRARIES)
 my_shared_libraries := $(LOCAL_SHARED_LIBRARIES)
 my_cflags := $(LOCAL_CFLAGS)
+my_cflags := -w $(filter-out -Wall -Werror -Wextra -Weverything,$(my_cflags))
 my_conlyflags := $(LOCAL_CONLYFLAGS)
 my_cppflags := $(LOCAL_CPPFLAGS)
 my_ldflags := $(LOCAL_LDFLAGS)
@@ -769,10 +770,11 @@ proto_generated_objects := $(addprefix $(proto_generated_obj_dir)/, \
 
 define copy-proto-files
 $(if $(PRIVATE_PROTOC_OUTPUT), \
+   $(if $(call streq,$(PRIVATE_PROTOC_INPUT),$(PRIVATE_PROTOC_OUTPUT)),, \
    $(eval proto_generated_path := $(dir $(subst $(PRIVATE_PROTOC_INPUT),$(PRIVATE_PROTOC_OUTPUT),$@)))
    @mkdir -p $(dir $(proto_generated_path))
    @echo "Protobuf relocation: $@ => $(proto_generated_path)"
-   @cp -f $@ $(proto_generated_path) ,)
+   @cp -f $@ $(proto_generated_path) ),)
 endef
 
 
@@ -793,6 +795,17 @@ $(proto_generated_headers): $(proto_generated_sources_dir)/%.pb.h: $(proto_gener
 	@echo "Updated header file $@."
 	$(hide) touch $@
 	$(copy-proto-files)
+
+$(if $(LOCAL_PROTOC_OUTPUT), \
+$(if $(call streq,$(LOCAL_PROTOC_OUTPUT),$(LOCAL_PATH)),, \
+  $(eval proto_relocated_headers := $(subst $(LOCAL_PATH),$(LOCAL_PROTOC_OUTPUT),$(proto_generated_headers))) \
+ ), )
+
+ifdef proto_relocated_headers
+$(proto_relocated_headers): $(proto_generated_headers)
+	echo "Refreshed header file $@."
+	$(hide) touch $@
+endif
 
 $(my_prefix)_$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_proto_defined := true
 endif  # transform-proto-to-cc rule included only once
