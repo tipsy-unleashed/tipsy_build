@@ -85,12 +85,12 @@ $(info ${CLR_YLW}   TARGET_CPU_VARIANT= $(TARGET_CPU_VARIANT))
 $(info ${CLR_YLW}   TARGET_2ND_CPU_VARIANT= $(TARGET_2ND_CPU_VARIANT))
 ifdef TARGET_GCC_VERSION_EXP
     $(info ${CLR_MAG}   ROM_TOOLCHAIN_USED= $(TARGET_GCC_VERSION_EXP))
-    else
+  else
     $(info ${CLR_MAG}   ROM_TOOLCHAIN_USED= DEVICE HAS NO ROM TC SET)
 endif
 ifdef TARGET_GCC_VERSION_ARM
     $(info ${CLR_MAG}   KERNEL_TOOLCHAIN_USED= $(TARGET_GCC_VERSION_ARM))
-    else
+  else
     $(info ${CLR_MAG}   KERNEL_TOOLCHAIN_USED= $(KERNEL_TOOLCHAIN))
 endif
 $(info ${CLR_YLW}   HOST_ARCH= $(HOST_ARCH))
@@ -99,5 +99,33 @@ $(info ${CLR_YLW}   HOST_OS_EXTRA= $(HOST_OS_EXTRA))
 $(info ${CLR_YLW}   HOST_BUILD_TYPE= $(HOST_BUILD_TYPE))
 $(info ${CLR_YLW}   BUILD_ID= $(BUILD_ID))
 $(info ${CLR_YLW}   OUT_DIR= $(OUT_DIR))
+$(info ${CLR_CYN} ===========Build Optimizations==============)
+ifdef CLANG_O3
+$(info ${CLR_MAG}   CLANG_O3=$(CLANG_O3))
+endif
+ifdef CORTEX_TUNINGS
+$(info ${CLR_MAG}   CORTEX_TUNINGS=$(CORTEX_TUNINGS))
+endif
+ifdef ENABLE_GCCONLY
+$(info ${CLR_MAG}   ENABLE_GCCONLY=$(ENABLE_GCCONLY))
+endif
+ifdef ENABLE_SANITIZE
+$(info ${CLR_MAG}   ENABLE_SANITIZE=$(ENABLE_SANITIZE))
+endif
+ifdef GRAPHITE_OPTS
+$(info ${CLR_MAG}   GRAPHITE_OPTS=$(GRAPHITE_OPTS))
+endif
+ifdef KRAIT_TUNINGS
+$(info ${CLR_MAG}   KRAIT_TUNINGS=$(KRAIT_TUNINGS))
+endif
+ifdef STRICT_ALIASING
+$(info ${CLR_MAG}   STRICT_ALIASING=$(STRICT_ALIASING))
+endif
+ifdef USE_PIPE
+$(info ${CLR_MAG}   USE_PIPE=$(USE_PIPE))
+endif
+ifdef POLLY_OPTIMIZATION
+$(info ${CLR_MAG}   POLLY_OPTIMIZATION=$(POLLY_OPTIMIZATION))
+endif
 $(info ${CLR_CYN} ============================================)
 endif
