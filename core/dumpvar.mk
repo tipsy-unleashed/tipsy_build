@@ -127,5 +127,5 @@ endif
 ifdef POLLY_OPTIMIZATION
 $(info ${CLR_MAG}   POLLY_OPTIMIZATION=$(POLLY_OPTIMIZATION))
 endif
-$(info ${CLR_CYN} ============================================)
+$(info ${CLR_CYN} ============================================${CLR_RST})
 endif
