@@ -255,10 +255,19 @@ DISABLE_SANITIZE_LEAK := \
 # Cortex Tuning
 ################
 LOCAL_DISABLE_CORTEX := \
+	libc_dns \
+	libc_tzcode \
 	bluetooth.default 
 
 ifeq (arm,$(TARGET_ARCH))
 CORTEX_FLAGS := \
         -mcpu=cortex-a57.cortex-a53 \
         -mtune=cortex-a57.cortex-a53
+
+# Link binaries with Cortex-a15 string routines
+ifndef LOCAL_IS_HOST_MODULE
+  ifeq ($(filter $(DISABLE_CORTEX_STRINGS), $(LOCAL_MODULE)),)
+    my_ldflags += -L$(BUILD_SYSTEM)/../libs/$(TARGET_ARCH) -lbionic-a15
+    endif
+  endif
 endif

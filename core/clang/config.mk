@@ -32,6 +32,34 @@ CLANG_CONFIG_EXTRA_CPPFLAGS :=
 CLANG_CONFIG_EXTRA_LDFLAGS :=
 endif
 
+# Poly
+POLLYCC := \
+      -mllvm -polly \
+      -mllvm -polly-allow-nonaffine=1\
+      -mllvm -polly-ignore-aliasing=1 \
+      -mllvm -polly-ast-detect-parallel \
+      -mllvm -polly-disable-multiplicative-reductions
+
+ifeq ($(POLLY_OPTIMIZATION),true)
+DISABLE_POLLY := \
+   v8_tools_gyp_v8_base_arm_host_gyp%
+
+ ifeq ($(LOCAL_CLANG),true)
+  ifneq (1,$(words $(filter $(DISABLE_POLLY),$(LOCAL_MODULE))))
+   ifdef LOCAL_CFLAGS
+     LOCAL_CFLAGS += $(POLLYCC)
+   else
+     LOCAL_CFLAGS := $(POLLYCC)
+   endif
+   ifdef LOCAL_CPPFLAGS
+     LOCAL_CPPFLAGS += $(POLLYCC)
+   else
+     LOCAL_CPPFLAGS := $(POLLYCC)
+   endif
+  endif
+ endif
+endif
+
 CLANG_CONFIG_EXTRA_CFLAGS += \
   -D__compiler_offsetof=__builtin_offsetof
 
@@ -59,6 +87,11 @@ CLANG_CONFIG_EXTRA_CFLAGS += \
 CLANG_CONFIG_EXTRA_CPPFLAGS += \
   -Wno-inconsistent-missing-override
 
+# Force clang to always output color diagnostics.  Ninja will strip the ANSI
+# color codes if it is not running in a terminal.
+CLANG_CONFIG_EXTRA_CFLAGS += \
+  -fcolor-diagnostics
+
 CLANG_CONFIG_UNKNOWN_CFLAGS := \
   -finline-functions \
   -finline-limit=64 \
@@ -84,7 +117,8 @@ CLANG_CONFIG_UNKNOWN_CFLAGS := \
   -Wno-unused-but-set-variable \
   -Wno-unused-local-typedefs \
   -Wunused-but-set-parameter \
-  -Wunused-but-set-variable
+  -Wunused-but-set-variable \
+  -fdiagnostics-color
 
 # Clang flags for all host rules
 CLANG_CONFIG_HOST_EXTRA_ASFLAGS :=
